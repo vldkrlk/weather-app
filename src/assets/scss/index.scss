@@ -1,0 +1,173 @@
+@import "./variables.scss";
+@import url("http://fonts.cdnfonts.com/css/gotham");
+
+body {
+  background-color: $background;
+  padding: 0;
+  margin: 0;
+  font-family: "Gotham", sans-serif;
+  color: $font-color;
+}
+button {
+  cursor: pointer;
+  border: none;
+}
+* {
+  box-sizing: border-box;
+}
+*::selection {
+  background-color: rgb(170, 219, 219);
+  color: rgb(26, 40, 49);
+}
+.wrap {
+  padding: 0 135px;
+  margin-top: 125px;
+  display: flex;
+  gap: 80px;
+}
+.gray {
+  color: $gray;
+}
+.side-bar {
+  width: 310px;
+}
+
+.section {
+  background-color: #fff;
+  width: 310px;
+  box-shadow: 0px 4px 28px rgba(150, 169, 186, 0.5);
+  border-radius: 30px;
+  padding: 30px 43px;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  width: 100%;
+  font-size: 16px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  gap: 7px;
+  color: #6a7078;
+  padding: 5px 13px;
+}
+.today-section {
+  &__ico-block {
+    margin-top: 25px;
+  }
+  &__ico {
+    display: block;
+    margin: 0 auto;
+  }
+}
+.today-info {
+  margin-top: 70px;
+  padding-bottom: 20px;
+  &__degrees-text {
+    position: relative;
+  }
+  &__degree {
+    font-size: 64px;
+    font-weight: 100;
+  }
+  &__text {
+    margin-top: 15px;
+  }
+  &__degree-unit {
+    position: absolute;
+    font-size: 20px;
+  }
+  &__city {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__date-day {
+    font-size: 15px;
+  }
+  &__date-time {
+    font-size: 15px;
+    color: $gray;
+  }
+}
+
+.content-main {
+  padding-top: 20px;
+  &__header-body {
+    display: flex;
+    gap: 50px;
+    color: $gray;
+  }
+}
+.title-btn {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 36px;
+}
+.title-btn_active {
+  color: $font-color;
+}
+@mixin block {
+  background: #ffffff;
+  box-shadow: 0px 4px 15px rgba(150, 169, 186, 0.25);
+  border-radius: 30px;
+}
+.content-days {
+  margin-top: 55px;
+  display: flex;
+  gap: 28px;
+  &__item {
+    @include block;
+    width: 160px;
+    height: 180px;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 26px;
+    padding-bottom: 11px;
+    & h3 {
+      font-weight: 500;
+      font-size: 24px;
+      margin: 0;
+      margin-bottom: 7px;
+    }
+  }
+  &__item-degree {
+    margin-top: 20px;
+  }
+  &__item-degree-body {
+    font-weight: 500;
+    font-size: 18px;
+    display: flex;
+    color: #313135;
+    display: flex;
+    gap: 3px;
+    &:nth-child(2) {
+      color: $gray;
+    }
+  }
+}
+
+.todays-highlights {
+  display: grid;
+  grid-template-rows: repeat(2, 210px);
+  grid-template-columns: repeat(3, 250px) 462px;
+  gap: 30px;
+  &__item {
+    @include block;
+    width: 250px;
+    height: 210px;
+    &_map {
+      @include block;
+      width: 100%;
+      height: 100%;
+      grid-column-start: 4;
+      grid-column-end: 5;
+      grid-row-start: 1;
+      grid-row-end: 3;
+    }
+  }
+}
