@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import WeatherApi from "./api/weather";
+
+const api = new WeatherApi();
+api.getCurrentWeather().then((data) => {
+  console.log(data);
+});
+</script>
 <template>
   <div class="wrap">
     <div class="side-bar">
@@ -404,5 +412,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts"></script>
