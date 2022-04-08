@@ -1,28 +1,39 @@
 import Api from "./api";
 import LocationApi from "./location";
-import Weather from "@/types/Weather";
 import Method from "@/types/Method";
+import Cords from "@/types/Cords";
+import IWeatherApi from "@/types/WeatherApi";
+import { AxiosResponse } from "axios";
 
-class WeatherApi {
+class WeatherApi implements IWeatherApi {
   private locationApi = new LocationApi();
-
   private api = new Api(process.env.VUE_APP_API_URL);
-  public async getCurrentWeather(): Promise<Weather | null> {
-    try {
-      const location = await this.locationApi.location();
 
-      if (!location) {
-        throw new Error("Location is invalid");
-      }
+  async init() {
+    await this.locationApi.init();
+    return;
+  }
 
-      const response = await this.api.query("/api/weather", Method.GET, {
+  public async getDailyForecast(): Promise<object> {
+    const location: Cords = await this.getLocation();
+    const weatherResponse: AxiosResponse<object> = await this.api.query(
+      "/api/data/2.5/onecall",
+      Method.GET,
+      {
         ...location,
-      });
+        units: "metric",
+      }
+    );
 
-      return response.data;
-    } catch (e) {
-      return null;
+    return weatherResponse.data;
+  }
+
+  private async getLocation(): Promise<Cords> {
+    const location = await this.locationApi.location();
+    if (!location) {
+      throw new Error("Location is invalid");
     }
+    return location;
   }
 }
 

@@ -11,5 +11,4 @@
       <div class="todays-highlights__item_map"></div>
     </div>
   </div>
-  /<template> </template>
 </template>

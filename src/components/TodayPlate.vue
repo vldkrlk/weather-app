@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import { defineProps, computed } from "vue";
+
+interface Props {
+  country: string;
+  temperature: number;
+  city: string;
+}
+
+const props = defineProps<Props>();
+const roundedTemperature = computed(() => {
+  return Math.round(props.temperature);
+});
+</script>
+
 <template>
   <section class="section today-section">
     <div>
@@ -17,13 +32,13 @@
       <div class="today-info__main">
         <div class="today-info__degrees">
           <span class="today-info__degrees-text">
-            <span class="today-info__degree">9</span>
+            <span class="today-info__degree">{{ roundedTemperature }}</span>
             <span class="today-info__degree-unit">°C</span>
           </span>
         </div>
         <div class="today-info__text">
           <div class="today-info__city">
-            <span>Kyiv, UA</span>
+            <span>{{ props.city }}, {{ props.country }}</span>
           </div>
           <div class="today-info__date">
             <div>
