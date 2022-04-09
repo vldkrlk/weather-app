@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { defineProps, computed } from "vue";
+import { defineProps, computed, onMounted, onUnmounted, ref, Ref } from "vue";
 import WeatherIco from "./WeatherIco.vue";
+import moment from "moment";
 
 interface Props {
   country: string;
@@ -8,10 +9,31 @@ interface Props {
   city: string;
   ico: string;
 }
-
 const props = defineProps<Props>();
 const roundedTemperature = computed(() => {
   return Math.round(props.temperature);
+});
+
+function getTime(): string {
+  return moment().format("hh:mm");
+}
+
+function getDay(): string {
+  return moment().format("dddd");
+}
+
+const day: Ref<string> = ref(getDay());
+const time: Ref<string> = ref(getTime());
+
+let timerId: number;
+onMounted(() => {
+  timerId = setInterval(() => {
+    day.value = getDay();
+    time.value = getTime();
+  }, 1000);
+});
+onUnmounted(() => {
+  clearInterval(timerId);
 });
 </script>
 
@@ -44,8 +66,8 @@ const roundedTemperature = computed(() => {
           </div>
           <div class="today-info__date">
             <div>
-              <span class="today-info__date-day">Monday,</span>
-              <span class="today-info__date-time">14:21</span>
+              <span class="today-info__date-day">{{ day }},</span>
+              <span class="today-info__date-time">{{ time }}</span>
             </div>
           </div>
         </div>
