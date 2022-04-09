@@ -19,6 +19,7 @@ const location: Ref<GeoPosition | undefined> = ref();
 await api.init();
 await locationApi.init();
 data.value = await api.getDailyForecast();
+console.log(data.value);
 location.value = await locationApi.getCountryAndCityNames();
 data.value.daily.splice(0, 1);
 </script>
@@ -31,6 +32,7 @@ data.value.daily.splice(0, 1);
         :city="location.name"
         :country="location.country"
         :temperature="data.current.temp"
+        :ico="data.current.weather[0].icon"
       ></TodayPlate>
     </div>
     <div class="content">

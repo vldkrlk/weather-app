@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { defineProps, computed } from "vue";
+import WeatherIco from "./WeatherIco.vue";
 
 interface Props {
   country: string;
   temperature: number;
   city: string;
+  ico: string;
 }
 
 const props = defineProps<Props>();
@@ -26,7 +28,7 @@ const roundedTemperature = computed(() => {
       </button>
     </div>
     <div class="today-section__ico-block">
-      <img class="today-section__ico" src="../assets/svg/ico.svg" />
+      <WeatherIco :ico="props.ico" :size="188"></WeatherIco>
     </div>
     <div class="today-info">
       <div class="today-info__main">
