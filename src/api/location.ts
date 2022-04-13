@@ -32,7 +32,7 @@ class LocationApi implements ILocationApi {
     return Storage.get("location") != null;
   }
 
-  public async getCountryAndCityNames(): Promise<GeoPosition | undefined> {
+  public async getCountryAndCityNames(): Promise<GeoPosition> {
     try {
       const { lon, lat }: Cords = await this.location();
 
@@ -45,9 +45,10 @@ class LocationApi implements ILocationApi {
           limit: 1,
         }
       );
+
       return response.data[0];
     } catch (e) {
-      console.error(e);
+      throw new Error();
     }
   }
 

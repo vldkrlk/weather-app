@@ -1,8 +1,7 @@
 import Temp from "./Temp";
-import Weather from "./Weather";
+import Hour from "./Hour";
 
-export default interface Day {
-  dt: number;
+interface Day extends Omit<Hour, "temp" | "feels_like" | "visibility"> {
   sunrise: number;
   sunset: number;
   moonrise: number;
@@ -15,15 +14,7 @@ export default interface Day {
     eve: number;
     morn: number;
   };
-  pressure: number;
-  humidity: number;
-  dew_point: number;
-  wind_speed: number;
-  wind_deg: number;
-  wind_gust: number;
-  weather: Weather[];
-  clouds: number;
-  pop: number;
   rain: number;
-  uvi: number;
 }
+
+export default Day;

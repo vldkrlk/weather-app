@@ -3,6 +3,7 @@ import LocationApi from "./location";
 import Method from "@/types/Method";
 import Cords from "@/types/Cords";
 import IWeatherApi from "@/types/WeatherApi";
+import Forecast from "../types/Forecast";
 import { AxiosResponse } from "axios";
 
 class WeatherApi implements IWeatherApi {
@@ -14,9 +15,9 @@ class WeatherApi implements IWeatherApi {
     return;
   }
 
-  public async getDailyForecast(): Promise<object> {
+  public async getDailyForecast(): Promise<Forecast> {
     const location: Cords = await this.getLocation();
-    const weatherResponse: AxiosResponse<object> = await this.api.query(
+    const weatherResponse: AxiosResponse<Forecast> = await this.api.query(
       "/api/data/2.5/onecall",
       Method.GET,
       {

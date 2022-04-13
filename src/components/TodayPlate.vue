@@ -15,7 +15,7 @@ const roundedTemperature = computed(() => {
 });
 
 function getTime(): string {
-  return moment().format("hh:mm");
+  return moment().format("HH:mm");
 }
 
 function getDay(): string {
@@ -66,7 +66,7 @@ onUnmounted(() => {
           </div>
           <div class="today-info__date">
             <div>
-              <span class="today-info__date-day">{{ day }},</span>
+              <span class="today-info__date-day">{{ day }}, </span>
               <span class="today-info__date-time">{{ time }}</span>
             </div>
           </div>
