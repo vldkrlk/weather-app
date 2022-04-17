@@ -8,12 +8,12 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const imageSrc = computed(() => {
+const image = computed(() => {
   return require(`../assets/svg/${props.ico}.svg`);
 });
 </script>
 <template>
-  <div>
-    <img :src="imageSrc" :width="size" />
+  <div class="weather-ico">
+    <img :src="image" :width="size" />
   </div>
 </template>

@@ -1,6 +1,5 @@
 @import "./variables.scss";
 @import url("http://fonts.cdnfonts.com/css/gotham");
-
 body {
   background-color: $background;
   padding: 0;
@@ -11,6 +10,9 @@ body {
 button {
   cursor: pointer;
   border: none;
+}
+.gray {
+  color: $gray;
 }
 * {
   box-sizing: border-box;
@@ -23,18 +25,29 @@ h3 {
   margin: 0;
 }
 .wrap {
-  padding: 0 135px;
   margin-top: 125px;
-  display: flex;
-  gap: 80px;
+  display: grid;
+  gap: 70px;
+  justify-content: center;
+  grid-template-columns: 310px;
+  grid-template-areas:
+    "side-bar content"
+    "side-bar highlights";
+  max-width: 100%;
+  padding-bottom: 80px;
 }
-.gray {
-  color: $gray;
+.content {
+  grid-area: content;
+  max-width: 100%;
+  width: fit-content;
+}
+.highlights {
+  grid-area: highlights;
+  width: fit-content;
 }
 .side-bar {
-  width: 310px;
+  grid-area: side-bar;
 }
-
 .section {
   background-color: #fff;
   width: 310px;
@@ -120,7 +133,8 @@ h3 {
 .content-days {
   margin-top: 55px;
   display: flex;
-  gap: 28px;
+  flex-wrap: wrap;
+  gap: 25px;
   &__item {
     @include block;
     width: 160px;
@@ -318,3 +332,9 @@ h3 {
     font-size: 32px;
   }
 }
+
+.weather-ico {
+  display: flex;
+  justify-content: center;
+}
+@import "./media.scss";

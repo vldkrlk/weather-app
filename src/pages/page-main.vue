@@ -39,6 +39,8 @@ data.value.daily.splice(0, 1);
         <AppHeader></AppHeader>
         <AppWeek :days="data.daily"></AppWeek>
       </div>
+    </div>
+    <div class="highlights">
       <AppHighlights
         :cords="{
           lon: location.lon,

@@ -1,0 +1,118 @@
+@media (max-width: 1730px) {
+  .wrap {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 1680px) {
+  .content-days {
+    width: 900px;
+  }
+  .wrap {
+    grid-template-areas:
+      "side-bar content"
+      "highlights highlights"
+      "highlights highlights";
+  }
+}
+
+@media (max-width: 1350px) {
+  .highlights {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .todays-highlights {
+    grid-template-rows: repeat(4, 210px);
+    grid-template-columns: repeat(3, 250px);
+    &__item {
+      &_map {
+        @include block;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 5;
+      }
+    }
+  }
+}
+
+@media (max-width: 1350px) {
+  .wrap {
+    margin-top: 40px;
+  }
+  .content-main {
+    padding: 0;
+    &__header {
+      display: none;
+    }
+  }
+  .content-days {
+    margin-top: 0;
+    width: 345px;
+    &__item:last-child {
+      display: none;
+    }
+  }
+  .today-section {
+    height: 100%;
+  }
+}
+
+@media (max-width: 850px) {
+  .content-days {
+    margin-top: 0;
+    width: 345px;
+    &__item:last-child {
+      display: none;
+    }
+  }
+  .todays-highlights {
+    gap: 15px;
+    grid-template-rows: repeat(5, 210px);
+    grid-template-columns: repeat(2, 250px);
+    &__item {
+      &_map {
+        @include block;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 6;
+      }
+    }
+  }
+}
+
+@media (max-width: 730px) {
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .content {
+    overflow-x: scroll;
+  }
+  .content-days {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    width: auto;
+    max-width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .todays-highlights {
+    display: flex;
+    flex-direction: column;
+    &__item {
+      &_map {
+        @include block;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 6;
+      }
+    }
+  }
+}
