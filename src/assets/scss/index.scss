@@ -337,4 +337,25 @@ h3 {
   display: flex;
   justify-content: center;
 }
+
+.preloader {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__ico {
+    animation: loader_rotate 3s infinite;
+  }
+  @keyframes loader_rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
 @import "./media.scss";
