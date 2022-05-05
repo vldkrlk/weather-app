@@ -6,11 +6,11 @@ import HighlightSun from "./highlights/HighlightSun.vue";
 import HighlightHumidity from "./highlights/HighlightHumidity.vue";
 import HighlightVisibility from "./highlights/HighlightVisibility.vue";
 import HighlightTemp from "./highlights/HighlightTemp.vue";
-import Cords from "../types/Cords";
+import Coords from "../types/Coords";
 import { defineProps } from "vue";
 
 interface Props {
-  cords: Cords;
+  coords: Coords;
   uvindex: number;
   windSpeed: number;
   windDeg: number;
@@ -50,7 +50,7 @@ const props = defineProps<Props>();
       ></HighlightTemp>
 
       <div class="todays-highlights__item_map">
-        <WeatherMap :cords="props.cords"></WeatherMap>
+        <WeatherMap :coords="props.coords"></WeatherMap>
       </div>
     </div>
   </div>

@@ -1,10 +1,7 @@
-import Cords from "./Cords";
-import GeoPosition from "./GeoPosition";
+import Locality from "./Locality";
 
 export default interface ILocationApi {
-  init(): void;
-  location(): Cords;
-  setLocation(location: object): void;
-  isLocationInStorage(): boolean;
-  getCountryAndCityNames(): Promise<GeoPosition | undefined>;
+  getLocation(): Promise<GeolocationPosition>;
+  getLocality(lat: number, lon: number): Promise<Locality>;
+  setLocation(lat: number, lon: number): void;
 }

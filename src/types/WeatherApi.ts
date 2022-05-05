@@ -1,4 +1,5 @@
+import Forecast from "../types/Forecast";
+
 export default interface IWeatherApi {
-  init(): void;
-  getDailyForecast(): Promise<object>;
+  getDailyForecast(): Promise<Forecast>;
 }

@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import PageMain from "./pages/page-main.vue";
-import AppPreloader from "./components/AppPreloader.vue";
+import AppPreloader from "./components/ThePreloader.vue";
 </script>
 <template>
-  <Suspense>
-    <template #default>
-      <PageMain></PageMain>
-    </template>
-    <template #fallback>
-      <AppPreloader />
-    </template>
-  </Suspense>
+  <RouterView v-slot="{ Component, route }">
+    <transition mode="out-in" :duration="300" :key="route.path">
+      <Suspense timeout="0">
+        <template #default>
+          <component :is="Component"></component>
+        </template>
+        <template #fallback>
+          <AppPreloader />
+        </template>
+      </Suspense>
+    </transition>
+  </RouterView>
 </template>

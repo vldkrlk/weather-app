@@ -1,35 +1,20 @@
 <script lang="ts" setup>
-import leaflet, { LatLngTuple } from "leaflet";
-import "leaflet/dist/leaflet.css";
-import { onMounted, defineProps } from "vue";
-import Cords from "../types/Cords";
-
-let map;
-const API_KEY = process.env.VUE_APP_MAPBOX_API_KEY;
+import { defineProps } from "vue";
+import Coords from "../types/Coords";
 
 interface Props {
-  cords: Cords;
+  coords: Coords;
 }
 
 const props = defineProps<Props>();
-const cityCords: LatLngTuple = [props.cords.lat, props.cords.lon];
-
-onMounted(() => {
-  map = leaflet.map("mapHighlights").setView(cityCords, 13);
-  leaflet
-    .tileLayer(
-      `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${API_KEY}`,
-      {
-        maxZoom: 18,
-        id: "mapbox/streets-v11",
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: API_KEY,
-      }
-    )
-    .addTo(map);
-});
+const API_KEY = process.env.VUE_APP_MAPBOX_API_KEY;
+const DEFAULT_ZOOM = 8;
 </script>
 <template>
-  <div id="mapHighlights"></div>
+  <mapbox-map
+    @loaded="(event) => event.resize()"
+    :accessToken="API_KEY"
+    :center="[props.coords.lon, props.coords.lat]"
+    :zoom="DEFAULT_ZOOM"
+  ></mapbox-map>
 </template>
