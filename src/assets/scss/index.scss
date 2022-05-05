@@ -361,13 +361,33 @@ h3 {
   }
 }
 
-.base-button{
+.base-button {
   padding: 10px 15px;
   background-color: #5a87de;
   color: #fff;
   font-weight: bold;
   font-family: "Gotham", sans-serif;
   border-radius: 5px;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__body{
+    background-color: #FFF;
+    width: 300px;
+    height: 100px;
+    border-radius: 20px;
+    padding: 10px;
+  }
 }
 
 @import "./media.scss";

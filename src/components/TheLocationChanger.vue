@@ -19,7 +19,7 @@ function setLocation() {
     return;
   }
   locationApi.setLocation(coords.value[1], coords.value[0]);
-  router.push({ path: "/" });
+  router.push({ name: "Main" });
 }
 
 async function setLocality(coords: CoordsTuple) {

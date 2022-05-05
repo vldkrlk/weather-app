@@ -2,6 +2,7 @@
 import { defineProps, computed, onMounted, onUnmounted, ref, Ref } from "vue";
 import WeatherIco from "./WeatherIco.vue";
 import moment from "moment";
+import { useRouter } from "vue-router";
 
 interface Props {
   country: string;
@@ -10,21 +11,18 @@ interface Props {
   ico: string;
 }
 const props = defineProps<Props>();
+const router = useRouter();
 const roundedTemperature = computed(() => {
   return Math.round(props.temperature);
 });
-
 function getTime(): string {
   return moment().format("HH:mm");
 }
-
 function getDay(): string {
   return moment().format("dddd");
 }
-
 const day: Ref<string> = ref(getDay());
 const time: Ref<string> = ref(getTime());
-
 let timerId: number;
 onMounted(() => {
   timerId = setInterval(() => {
@@ -40,7 +38,10 @@ onUnmounted(() => {
 <template>
   <section class="section today-section">
     <div>
-      <button class="search-btn">
+      <button
+        class="search-btn"
+        @click="router.push({ name: 'ChangeLocation' })"
+      >
         <div>
           <img src="../assets/svg/search.svg" />
         </div>
