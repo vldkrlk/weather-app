@@ -32,6 +32,10 @@ forecast.value.daily.splice(0, 1); // remove today
           :country="response.locality.value.country"
           :temperature="forecast.current.temp"
           :ico="forecast.current.weather[0].icon"
+          :coords="{
+            lon: response.location.value.coords.longitude,
+            lat: response.location.value.coords.latitude,
+          }"
         ></TodayPlate>
       </div>
       <div class="content">

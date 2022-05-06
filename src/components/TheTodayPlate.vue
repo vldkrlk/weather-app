@@ -1,34 +1,49 @@
 <script lang="ts" setup>
 import { defineProps, computed, onMounted, onUnmounted, ref, Ref } from "vue";
 import WeatherIco from "./WeatherIco.vue";
-import moment from "moment";
+import moment from "moment-timezone";
+import ts from "@mapbox/timespace";
 import { useRouter } from "vue-router";
+import Coords from "@/types/Coords";
 
 interface Props {
   country: string;
   temperature: number;
   city: string;
   ico: string;
+  coords: Coords;
 }
 const props = defineProps<Props>();
 const router = useRouter();
+
+const day: Partial<Ref<string>> = ref();
+const time: Partial<Ref<string>> = ref();
+
+const timestamp = Date.now();
+
+const zoneObject = ts.getFuzzyLocalTimeFromPoint(timestamp, [
+  props.coords.lon,
+  props.coords.lat,
+]);
+
 const roundedTemperature = computed(() => {
   return Math.round(props.temperature);
 });
-function getTime(): string {
-  return moment().format("HH:mm");
+
+function getTime(format: string): string {
+  return moment().tz(zoneObject._z.name).format(format);
 }
-function getDay(): string {
-  return moment().format("dddd");
+
+function updateTime() {
+  day.value = getTime("dddd");
+  time.value = getTime("HH:mm");
 }
-const day: Ref<string> = ref(getDay());
-const time: Ref<string> = ref(getTime());
+updateTime();
+
 let timerId: number;
+
 onMounted(() => {
-  timerId = setInterval(() => {
-    day.value = getDay();
-    time.value = getTime();
-  }, 1000);
+  timerId = setInterval(() => updateTime, 1000);
 });
 onUnmounted(() => {
   clearInterval(timerId);
