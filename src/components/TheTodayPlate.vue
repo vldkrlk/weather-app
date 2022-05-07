@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { defineProps, computed, onMounted, onUnmounted, ref, Ref } from "vue";
-import WeatherIco from "./WeatherIco.vue";
+import WeatherIco from "./ui/WeatherIco.vue";
 import moment from "moment-timezone";
 import ts from "@mapbox/timespace";
 import { useRouter } from "vue-router";

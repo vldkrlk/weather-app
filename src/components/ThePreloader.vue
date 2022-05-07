@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WeatherIco from "./WeatherIco.vue";
+import WeatherIco from "./ui/WeatherIco.vue";
 </script>
 
 <template>

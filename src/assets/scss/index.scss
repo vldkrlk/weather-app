@@ -123,6 +123,7 @@ h3 {
   cursor: pointer;
   font-weight: 700;
   font-size: 36px;
+  transition: .3s;
 }
 .title-btn_active {
   color: $font-color;
@@ -388,6 +389,19 @@ h3 {
     border-radius: 20px;
     padding: 10px;
   }
+}
+
+.forecast-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.forecast-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.forecast-enter-from,
+.forecast-leave-to {
+  // transform: translateX(20px);
+  opacity: 0;
 }
 
 @import "./media.scss";

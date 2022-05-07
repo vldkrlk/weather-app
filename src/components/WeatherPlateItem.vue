@@ -2,7 +2,7 @@
 import moment from "moment";
 import { defineProps } from "vue";
 import Day from "@/types/Day";
-import WeatherIco from "./WeatherIco.vue";
+import WeatherIco from "./ui/WeatherIco.vue";
 
 interface Props {
   day: Day;

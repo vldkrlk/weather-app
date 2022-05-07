@@ -2,10 +2,11 @@
 import WeatherApi from "../api/weather";
 import TodayPlate from "../components/TheTodayPlate.vue";
 import AppHeader from "../components/TheHeader.vue";
-import AppWeek from "../components/AppWeek.vue";
-import AppHighlights from "../components/AppHighlights.vue";
+import WeekForecast from "../components/TheWeekForecast.vue";
+import AppHighlights from "../components/WeatherHighlights.vue";
+import HourlyForecast from "@/components/TheHourlyForecast.vue";
 import Forecast from "../types/Forecast";
-import { ref } from "vue";
+import { ref, markRaw } from "vue";
 import useLocation from "../hooks/useLocation";
 import { useRouter } from "vue-router";
 
@@ -18,6 +19,17 @@ if (response == null) {
 }
 
 const forecast = ref<Forecast>();
+
+const tab = ref(null);
+
+function changeTab(compName) {
+  const lookup = {
+    WeekForecast,
+    HourlyForecast,
+  };
+  tab.value = markRaw(lookup[compName]);
+}
+changeTab("WeekForecast");
 
 forecast.value = await weatherApi.getDailyForecast();
 forecast.value.daily.splice(0, 1); // remove today
@@ -40,8 +52,14 @@ forecast.value.daily.splice(0, 1); // remove today
       </div>
       <div class="content">
         <div class="content-main">
-          <AppHeader></AppHeader>
-          <AppWeek :days="forecast.daily"></AppWeek>
+          <AppHeader @toggle="changeTab"></AppHeader>
+          <Transition name="forecast" mode="out-in">
+            <component
+              :is="tab"
+              :days="forecast.daily"
+              :hourly="forecast.hourly"
+            ></component>
+          </Transition>
         </div>
       </div>
       <div class="highlights">
