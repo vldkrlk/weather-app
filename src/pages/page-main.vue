@@ -7,7 +7,7 @@ import AppHighlights from "../components/WeatherHighlights.vue";
 import HourlyForecast from "@/components/TheHourlyForecast.vue";
 import Forecast from "../types/Forecast";
 import { ref, markRaw } from "vue";
-import useLocation from "../hooks/useLocation";
+import useLocation from "../composables/useLocation";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
