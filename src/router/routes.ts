@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Location",
     component: async () => import("../pages/errors/location-error.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "ErrorNotFound",
+    component: () => import("../pages/errors/notFound-error.vue"),
+  },
 ];
 
 export default routes;

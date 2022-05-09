@@ -400,8 +400,22 @@ h3 {
 }
 .forecast-enter-from,
 .forecast-leave-to {
-  // transform: translateX(20px);
   opacity: 0;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  &__code {
+    font-weight: bold;
+    font-size: 120px;
+  }
+  &__description {
+    font-weight: 200;
+  }
 }
 
 @import "./media.scss";
