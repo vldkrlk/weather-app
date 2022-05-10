@@ -1,0 +1,24 @@
+.location-error {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__menu {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &__city-name {
+    font-size: 60px;
+    margin-bottom: 30px;
+  }
+  &__map-wrap {
+    height: 70vh;
+  }
+  & h1,
+  p {
+    text-align: center;
+  }
+}

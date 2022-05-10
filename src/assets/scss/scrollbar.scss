@@ -1,0 +1,17 @@
+/* webkit browzers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $thumb-color;
+  border-radius: 9em;
+}
+
+/* Mozilla Firefox */
+
+html,
+body {
+  scrollbar-color: $thumb-color none;
+  scrollbar-width: 8px;
+}

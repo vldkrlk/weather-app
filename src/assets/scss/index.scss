@@ -1,6 +1,7 @@
-@import "./variables.scss";
 @import url("http://fonts.cdnfonts.com/css/gotham");
-
+@import "./variables.scss";
+@import "./scrollbar.scss";
+@import "./errors.scss";
 body {
   background-color: $background;
   padding: 0;
@@ -12,6 +13,9 @@ button {
   cursor: pointer;
   border: none;
 }
+.gray {
+  color: $gray;
+}
 * {
   box-sizing: border-box;
 }
@@ -19,19 +23,33 @@ button {
   background-color: rgb(170, 219, 219);
   color: rgb(26, 40, 49);
 }
-.wrap {
-  padding: 0 135px;
-  margin-top: 125px;
-  display: flex;
-  gap: 80px;
+h3 {
+  margin: 0;
 }
-.gray {
-  color: $gray;
+.wrap {
+  margin-top: 125px;
+  display: grid;
+  gap: 70px;
+  justify-content: center;
+  grid-template-columns: 310px;
+  grid-template-areas:
+    "side-bar content"
+    "side-bar highlights";
+  max-width: 100%;
+  padding-bottom: 80px;
+}
+.content {
+  grid-area: content;
+  max-width: 100%;
+  width: fit-content;
+}
+.highlights {
+  grid-area: highlights;
+  width: fit-content;
 }
 .side-bar {
-  width: 310px;
+  grid-area: side-bar;
 }
-
 .section {
   background-color: #fff;
   width: 310px;
@@ -105,6 +123,7 @@ button {
   cursor: pointer;
   font-weight: 700;
   font-size: 36px;
+  transition: .3s;
 }
 .title-btn_active {
   color: $font-color;
@@ -117,7 +136,8 @@ button {
 .content-days {
   margin-top: 55px;
   display: flex;
-  gap: 28px;
+  flex-wrap: wrap;
+  gap: 25px;
   &__item {
     @include block;
     width: 160px;
@@ -150,7 +170,6 @@ button {
     }
   }
 }
-
 .todays-highlights {
   display: grid;
   grid-template-rows: repeat(2, 210px);
@@ -158,8 +177,12 @@ button {
   gap: 30px;
   &__item {
     @include block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 250px;
     height: 210px;
+    padding: 25px;
     &_map {
       @include block;
       width: 100%;
@@ -168,6 +191,228 @@ button {
       grid-column-end: 5;
       grid-row-start: 1;
       grid-row-end: 3;
+      overflow: hidden;
+      #mapHighlights {
+        width: 100%;
+        height: 450px;
+      }
+    }
+  }
+  &__description {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+  }
+}
+.sun {
+  margin-top: 42px;
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  &__ico {
+    width: 43px;
+    height: 43px;
+    background: #f8e274;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__value {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 19px;
+    color: #313135;
+  }
+}
+.temperature {
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    &:nth-child(1) {
+      .temperature__ico {
+        background-color: #5a87de;
+      }
+    }
+    &:nth-child(2) {
+      .temperature__ico {
+        background-color: #de825b;
+      }
+    }
+  }
+  &__ico {
+    width: 24px;
+    height: 24px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  &__value {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 19px;
+    color: #313135;
+  }
+}
+.humidity {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 15px;
+}
+.highlight-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 19px;
+  color: #dadada;
+}
+.uv-chart {
+  position: relative;
+  &__value {
+    position: absolute;
+    font-size: 32px;
+    left: 50%;
+    margin-right: -50%;
+    bottom: 60px;
+    transform: translate(-50%, -50%);
+  }
+  &__body {
+    display: block;
+    margin: 0 auto;
+    margin-top: 25px;
+  }
+  &__label {
+    font-size: 5px;
+    color: gray;
+  }
+  & circle {
+    fill: none;
+    // animation-name: uv-chart-render;
+    transition-property: all;
+    transition-duration: 1.5s;
+    stroke-dashoffset: -69.115;
+    stroke-dasharray: 69.115 100;
+  }
+  &__main-line {
+    stroke-width: 6;
+    stroke: #f5d16c;
+  }
+  &__gray-line {
+    stroke-width: 3;
+    stroke: #e2e4e3;
+  }
+  @keyframes uv-chart-render {
+    0% {
+      stroke-dasharray: 0 100;
     }
   }
 }
+.highlight-text-block {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 19px;
+  color: #313135;
+  margin-top: 65px;
+  &__value {
+    font-size: 32px;
+  }
+}
+
+.weather-ico {
+  display: flex;
+  justify-content: center;
+}
+
+.preloader {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__ico {
+    animation: loader_rotate 3s infinite;
+  }
+  @keyframes loader_rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.base-button {
+  padding: 10px 15px;
+  background-color: #5a87de;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Gotham", sans-serif;
+  border-radius: 5px;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__body{
+    background-color: #FFF;
+    width: 300px;
+    height: 100px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+}
+
+.forecast-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.forecast-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.forecast-enter-from,
+.forecast-leave-to {
+  opacity: 0;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  &__code {
+    font-weight: bold;
+    font-size: 120px;
+  }
+  &__description {
+    font-weight: 200;
+  }
+}
+
+@import "./media.scss";
