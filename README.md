@@ -1,5 +1,3 @@
-[![MIT License][license-shield]][license-url]
-
 <br />
 <div  align="center">
 <img  src="static/app.png">
